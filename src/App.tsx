@@ -1,4 +1,4 @@
-import { FormEvent, ReactElement, useState } from 'react'
+import { ChangeEvent, FormEvent, ReactElement, useState } from 'react'
 import { ARABIC_DAYS, DayOfWeek } from './constants'
 import ArrowLeft from './icons/ArrowLeft'
 import Timetable from './Timetable'
@@ -58,11 +58,11 @@ function App (): ReactElement {
     setErrors(newErrors)
   }
 
-  const handlePeriodsChange = (e: FormEvent<HTMLInputElement>): void => {
+  const handlePeriodsChange = (e: ChangeEvent<HTMLInputElement>): void => {
     setPeriods(e.currentTarget.value)
     _validate('periods', e.currentTarget.value)
   }
-  const handleSectionsChange = (e: FormEvent<HTMLInputElement>): void => {
+  const handleSectionsChange = (e: ChangeEvent<HTMLInputElement>): void => {
     setSections(e.currentTarget.value)
     _validate('sections', e.currentTarget.value)
   }
@@ -102,15 +102,15 @@ function App (): ReactElement {
           {/* <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'>
             <path d='M448 32C483.3 32 512 60.65 512 96V416C512 451.3 483.3 480 448 480H64C28.65 480 0 451.3 0 416V96C0 60.65 28.65 32 64 32H448zM224 256V160H64V256H224zM64 320V416H224V320H64zM288 416H448V320H288V416zM448 256V160H288V256H448z' />
           </svg> */}
-          <h1 className='heading'>جداول هندسة</h1>
-          <p className='subtitle'>
+          <h1 className='heading no-print'>جداول هندسة</h1>
+          <p className='subtitle no-print'>
             موقع لعمل جداول كلية الهندسة (أو أي كلية أخرى)
           </p>
         </div>
         {timetableComponent === null && (
           <>
             <div className='mb-2'>
-              <div className='input-group'>
+              <div className='form-group'>
                 <label htmlFor='periods' className='label'>
                   عدد الفترات
                 </label>
@@ -127,7 +127,7 @@ function App (): ReactElement {
               )}
             </div>
             <div className='mb-2'>
-              <div className='input-group'>
+              <div className='form-group'>
                 <label htmlFor='sections' className='label'>
                   عدد السكاشن
                 </label>
@@ -167,7 +167,7 @@ function App (): ReactElement {
             <button
               onClick={createTimetable}
               disabled={isButtonDisabled()}
-              className='button'
+              className='button button-primary'
             >
               إنشاء الجدول
             </button>
@@ -179,7 +179,7 @@ function App (): ReactElement {
             <div className='flex justify-content-end'>
               <button
                 onClick={() => setTimetableComponent(null)}
-                className='button mt-2 no-print flex align-items-center'
+                className='button button-secondary mt-2 no-print flex align-items-center'
               >
                 إنشاء جدول جديد{' '}
                 <ArrowLeft

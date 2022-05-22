@@ -1,4 +1,5 @@
 import { FormEvent, ReactElement, useEffect, useRef, useState } from 'react'
+import ColorPreview from './ColorPreview'
 import { ARABIC_DAYS, DayOfWeek } from './constants'
 import Print from './icons/Print'
 import { make2DArrayOfObject } from './utils'
@@ -12,6 +13,7 @@ interface Props {
 interface Cell {
   value: string
   colSpan: string
+  background: string
 }
 
 interface CellIndex {
@@ -30,7 +32,11 @@ export default function Timetable ({
   const cellValueInpuRef = useRef<HTMLInputElement | null>(null)
 
   const [data, setData] = useState<Cell[][]>(
-    make2DArrayOfObject(ROWS, COLUMNS, { value: '', colSpan: '1' })
+    make2DArrayOfObject(ROWS, COLUMNS, {
+      value: '',
+      colSpan: '1',
+      background: 'transparent'
+    })
   )
   const [selectedCell, setSelectedCell] = useState<null | CellIndex>(null)
 
@@ -70,6 +76,14 @@ export default function Timetable ({
     }
   }
 
+  const updateCellBackground = (newBackground: string): void => {
+    if (selectedCell !== null) {
+      const newData = data.concat()
+      newData[selectedCell.r][selectedCell.c].background = newBackground
+      setData(newData)
+    }
+  }
+
   const handlePrint = async (): Promise<void> => {
     await setSelectedCell(null)
     window.print()
@@ -78,7 +92,7 @@ export default function Timetable ({
   return (
     <div>
       <div className='no-print'>
-        <div className='input-group mb-2'>
+        <div className='form-group input-group mb-2'>
           <label htmlFor='value' className='label'>
             القيمة
           </label>
@@ -96,7 +110,7 @@ export default function Timetable ({
             disabled={selectedCell === null}
           />
         </div>
-        <div className='select-group mb-2'>
+        <div className='form-group mb-2'>
           <label htmlFor='col-span' className='label'>
             عرض الخلية
           </label>
@@ -121,9 +135,45 @@ export default function Timetable ({
               ))}
           </select>
         </div>
+        <div className='form-group radio-group mb-2'>
+          <label className='label'>لون الخلفية للخلية</label>
+          <ColorPreview
+            text='شفاف'
+            value='transparent'
+            className='ml-2'
+            disabled={selectedCell === null}
+            selected={
+              selectedCell !== null &&
+              data[selectedCell.r][selectedCell.c].background === 'transparent'
+            }
+            updateCellBackground={updateCellBackground}
+          />
+          <ColorPreview
+            text='أزرق'
+            value='#d7ecfb'
+            className='ml-2'
+            disabled={selectedCell === null}
+            selected={
+              selectedCell !== null &&
+              data[selectedCell.r][selectedCell.c].background === '#d7ecfb'
+            }
+            updateCellBackground={updateCellBackground}
+          />
+          <ColorPreview
+            text='برتقالي'
+            value='#edf1b6'
+            className='ml-2'
+            disabled={selectedCell === null}
+            selected={
+              selectedCell !== null &&
+              data[selectedCell.r][selectedCell.c].background === '#edf1b6'
+            }
+            updateCellBackground={updateCellBackground}
+          />
+        </div>
       </div>
       <button
-        className='button mb-2 no-print flex align-items-center'
+        className='button button-primary mb-2 no-print flex align-items-center'
         onClick={handlePrint}
       >
         <Print fill='#fff' width={20} style={{ marginLeft: '0.5rem' }} /> طباعة
@@ -164,6 +214,10 @@ export default function Timetable ({
                         colSpan={+data[rowIndex][columnIndex].colSpan}
                         data-col={columnIndex}
                         tabIndex={0}
+                        style={{
+                          backgroundColor:
+                            data[rowIndex][columnIndex].background
+                        }}
                       >
                         <div>{data[rowIndex][columnIndex].value}</div>
                       </td>

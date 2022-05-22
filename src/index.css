@@ -26,6 +26,14 @@ body {
   /* background: linear-gradient(450deg, #d0fdca 22%, #e1f2fb 89%); */
 }
 
+.not-visible {
+  visibility: hidden;
+}
+
+.inline-block {
+  display: inline-block;
+}
+
 .flex {
   display: flex;
 }
@@ -63,26 +71,24 @@ body {
   margin-top: 0.5rem;
 }
 
+.ml-2 {
+  margin-left: 0.5rem;
+}
+
+.position-absolute {
+  position: absolute;
+}
+
 .label {
   font-weight: 500;
 }
 
-.input-group {
+.form-group {
   display: flex;
   align-items: center;
 }
 
-.select-group {
-  display: flex;
-  align-items: center;
-}
-
-.select-group .label {
-  width: 100px;
-  display: inline-block;
-}
-
-.input-group .label {
+.form-group .label {
   width: 100px;
   display: inline-block;
 }
@@ -90,6 +96,23 @@ body {
 .input-group .input {
   flex: 1;
   max-width: 300px;
+}
+
+.radio-warpper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.color-preview {
+  height: 20px;
+  width: 20px;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+}
+
+.color-preview.selected {
+  border-color: #000;
 }
 
 .input {
@@ -144,7 +167,6 @@ body {
 }*/
 
 .button {
-  background-color: #25bb25;
   border: none;
   padding: 1rem;
   border-radius: 5px;
@@ -154,6 +176,14 @@ body {
   transition: box-shadow 0.3s;
   font-weight: 600;
   box-shadow: 0 3px 3px 0 rgba(0, 0, 0, 0.2);
+}
+
+.button-primary {
+  background-color: #25bb25;
+}
+
+.button-secondary {
+  background-color: #0d68a9;
 }
 
 .button:disabled {
@@ -221,4 +251,8 @@ table tbody tr {
   .no-print {
     display: none;
   }
+}
+
+.cursor-pointer {
+  cursor: pointer;
 }
