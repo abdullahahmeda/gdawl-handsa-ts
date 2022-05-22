@@ -1,7 +1,7 @@
 import { ReactElement } from 'react'
 
 interface Props {
-  text: string
+  // text: string
   value: string
   updateCellBackground: (background: string) => void
   className?: string
@@ -10,7 +10,7 @@ interface Props {
 }
 
 export default function ColorPreview ({
-  text,
+  // text,
   value,
   className,
   updateCellBackground,
@@ -42,12 +42,12 @@ export default function ColorPreview ({
         style={{ backgroundColor: disabled ? '#ddd' : value }}
         htmlFor={`${value}-bg`}
       />
-      <label
+      {/* <label
         htmlFor={`${value}-bg`}
         style={{ color: disabled ? '#727272' : 'initial' }}
       >
         {text}
-      </label>
+      </label> */}
     </div>
   )
 }

@@ -138,7 +138,7 @@ export default function Timetable ({
         <div className='form-group radio-group mb-2'>
           <label className='label'>لون الخلفية للخلية</label>
           <ColorPreview
-            text='شفاف'
+            // text='شفاف'
             value='transparent'
             className='ml-2'
             disabled={selectedCell === null}
@@ -149,7 +149,7 @@ export default function Timetable ({
             updateCellBackground={updateCellBackground}
           />
           <ColorPreview
-            text='أزرق'
+            // text='أزرق'
             value='#d7ecfb'
             className='ml-2'
             disabled={selectedCell === null}
@@ -160,7 +160,7 @@ export default function Timetable ({
             updateCellBackground={updateCellBackground}
           />
           <ColorPreview
-            text='برتقالي'
+            // text='برتقالي'
             value='#edf1b6'
             className='ml-2'
             disabled={selectedCell === null}
